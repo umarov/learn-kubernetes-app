@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: learn-kubernetes-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: learn-kubernetes-app
+  template:
+    metadata:
+      labels:
+        app: learn-kubernetes-app
+    spec:
+      containers:
+        - name: app
+          image: mumarov/learn-kubernetes-app:0.0.1
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
