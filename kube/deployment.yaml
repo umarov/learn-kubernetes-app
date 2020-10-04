@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: learn-kubernetes-app
+  labels:
+    app.kubernetes.io/component: web
+
 spec:
   replicas: 1
   selector:
@@ -11,13 +14,30 @@ spec:
     metadata:
       labels:
         app: learn-kubernetes-app
+        app.kubernetes.io/name: learn-kubernetes-app
+        app.kubernetes.io/version: 0.0.3
+        app.kubernetes.io/component: web
+
     spec:
       containers:
         - name: app
-          image: mumarov/learn-kubernetes-app:0.0.1
+          image: mumarov/learn-kubernetes-app:0.0.3
           ports:
             - containerPort: 8080
           imagePullPolicy: Always
+
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 120
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            periodSeconds: 5
+
           resources:
             requests:
               memory: "128Mi"
