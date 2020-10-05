@@ -1,0 +1,11 @@
+# Strip prefix /learn-kubernetes-app
+# only works with traefik v2. useless for k3s
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: learn-kubernetes-app-strip-prefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /learn-kubernetes-app
+    forceSlash: false

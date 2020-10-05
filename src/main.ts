@@ -14,7 +14,7 @@ async function bootstrap() {
     new FastifyAdapter({
       logger: true, rewriteUrl: (req) => {
         if (req.url.startsWith('/learn-kubernetes-app')) {
-          return req.url.replace('/learn-kubernetes-app', '')
+          return req.url.replace('/learn-kubernetes-app', '/')
         } else {
           return req.url
         }
