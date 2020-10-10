@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/component: web
 
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: learn-kubernetes-app
@@ -31,17 +31,17 @@ spec:
               path: /
               port: 8080
             initialDelaySeconds: 120
-            periodSeconds: 5
+            periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /
               port: 8080
-            periodSeconds: 5
+            periodSeconds: 10
 
           resources:
             requests:
               memory: "128Mi"
-              cpu: "250m"
+              cpu: "100m"
             limits:
               memory: "256Mi"
-              cpu: "1"
+              cpu: "250m"
